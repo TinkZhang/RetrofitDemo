@@ -6,17 +6,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class BookViewModel: ViewModel() {
-    var numberFound = MutableLiveData<Int>()
+class ConverterViewModel: ViewModel() {
+    var text = MutableLiveData<String>()
 
     init {
-        numberFound.value = 0
+        text.value = "loading"
     }
 
-    fun searchBook(keyword: String) {
+    fun getRate(base: String, target: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.api.searchBook(keyword)
-            numberFound.postValue(response.body()?.numFound)
+            val response = RetrofitInstance.api.getRate(base, target)
+            text.postValue(response.string())
         }
     }
 }

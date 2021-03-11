@@ -4,11 +4,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    val api: BookApi by lazy {
+    val api: ConverterService by lazy {
         Retrofit.Builder()
-                .baseUrl("http://openlibrary.org/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://api.exchangeratesapi.io")
                 .build()
-                .create(BookApi::class.java)
+                .create(ConverterService::class.java)
     }
 }
